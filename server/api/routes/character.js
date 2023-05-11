@@ -1,8 +1,9 @@
 const router = require('express').Router();
-const {Character}= require('../db');
+const {Character}= require('../../db');
 
 // grabs all characters
 router.get('/', async (req,res,next)=>{
+
     try{
         const characters = await Character.findAll();
         res.send(characters);
@@ -18,6 +19,14 @@ router.get('/:id', async (req,res,next)=>{
         res.send(character)
     }catch(e){
         next(e)
+    }
+})
+
+router.post('/', async (req, res, next) => {
+    try {
+        const addCharacter = await Character.create(req.body)
+    } catch(err) {
+        next(err)
     }
 })
 

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {Car}= require('../db');
+const { Car }= require('../../db');
 
 // grabs all car
 router.get('/', async (req,res,next)=>{
@@ -21,4 +21,12 @@ router.get('/:id', async (req,res,next)=>{
     }
 })
 
-module.exports=  router;
+router.post('/', async (req, res, next) => {
+    try {
+        const addCharacter = await Car.create(req.body)
+    } catch(err) {
+        next(err)
+    }
+})
+
+module.exports = router;
