@@ -1,15 +1,22 @@
 import React from 'react';
 import './index.css';
-/*
-    This is you entry point for your routes
-*/
+import { Routes, Route, Link  } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import car from './reducers/car';
+import character from './reducers/character';
+import CarTable from './components/CarTable';
+import CharacterTable from './components/CharacterTable';
+
+
+
 
 export default function App() {
   return (
     <div>
-      <h1>Hello World</h1>
-      <p>hello world</p>
+      <Routes>
+        <Route path='/cartable' element={<CarTable />}/>
+        <Route path='/charactertable' element={<CharacterTable />}/>
+      </Routes>
     </div>
-  );
+  )
 }
-;

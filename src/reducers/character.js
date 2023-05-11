@@ -1,24 +1,38 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
 
-const initState = [];
+const initialState = {
+    charactersList: [],
+    loading: false,
+    error: null
+};
 
-export const fetchCharacters = createAsyncThunk('allCharacters', async ()=>{
+export const fetchAllCharacters = createAsyncThunk('allCharacters', async () => {
     try {
-        const {data} = await axios.get('/api/characters');
-        return data;
-    } catch (err){
-        console.log(err)
+        const response = await axios.get('http://localhost:3001/api/characters')
+        return response.data
+    } catch (e){
+        throw new Error('did not load, sorry')
     }
 })
 
+
 const characterSlice = createSlice({
     name: 'characters',
-    initState,
+    initialState,
     reducers:{},
     extraReducers:(builder)=>{
-        builder.addCase(fetchCharacters.fulfilled, (state, action)=>{
-            return action.payload
+        builder.addCase(fetchAllCharacters.pending, (state, action)=>{
+            state.loading = true;
+            state.error = null
+        })
+        .addCase(fetchAllCharacters.fulfilled, (state, action) => {
+            state.loading = false;
+            state.charactersList = action.payload
+        })
+        .addCase(fetchAllCharacters.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.error.message
         })
     }
 })

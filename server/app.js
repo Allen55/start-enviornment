@@ -5,19 +5,10 @@ const cors = require('cors')
 const routes = require('/Users/allenharper/Documents/Fullstack Academy/Junior Phase/start-enviornment/server/api/')
 
 
-
-// const characterRouter = require('./api/routes/characters');
-// const carRouter = require('./api/routes/car');
-
 // static middleware
 app.use(express.static(path.join(__dirname, '..','public')))
-app.use(cors())
-
-
-app.use('/api', routes)
-
-// app.use('/characters', characterRouter);
-// app.use('/cars', carRouter);
+app.use(cors());
+app.use('/api', routes);
 
 // app.use((err,req,res)=>{
 //   console.log("error is", err.status);
