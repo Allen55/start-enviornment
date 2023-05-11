@@ -3,6 +3,7 @@
 
 const db = require('./database')
 const Character = require('./models/character');
+const Car = require('./models/car');
 
 // establish relations using magic methods
 
